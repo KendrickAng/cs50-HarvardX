@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <h1>Your current holdings:</h1>
+    <table align="center" frame="border" style="width=100%">
+                <tr>
+                    <th>Stock symbol</th>
+                    <th>Stock name</th>
+                    <th>Current stock price</th>
+                    <th>Units owned</th>
+                    <th>Total holdings value</th>
+                </tr>
+
+                {# https://stackoverflow.com/questions/14652325/python-dictionary-in-to-html-table #}
+                {% for tablerow in stocks %}
+                    <tr>
+                        <td>{{ tablerow["symbol"] }}</td>
+                        <td>{{ tablerow["name"] }}</td>
+                        <td>{{ tablerow["price"] }}</td>
+                        <td>{{ tablerow["units"] }}</td>
+                        <td>{{ tablerow["total"] }}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+    <br>
+    <h2>To sell a stock, enter a stock symbol and units of stock you wish to sell:</h2>
+    <form action="{{ url_for('sell') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="stocksym" placeholder="Stock symbol" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="units" placeholder="Units" type="text"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Sell</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

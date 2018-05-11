@@ -1,0 +1,25 @@
+0.  A term referring to a lung disease caused by silica dust.
+
+1.  getrusage() returns resource usage measures for either: the sum of resources (SOR) used by all threads in the calling process, 
+    the SOR used by children of the calling process that was terminated and waited for, or the SOR of the calling thread. These values
+    are returned in the structure pointed to in the function.
+    
+2.  16 members are in a variable of type struct rusage.
+
+3.  before and after are of type struct rusage. Passing structs by value will use up a significant amount of memory as copies of the 
+    structs are made, whereas new copies will not be created if one passes structs by reference. This therefore saves time needed to 
+    copy such variables and helps prevent memory errors like stack overflows.
+    
+4.  In the for loop, c (an int) is assigned an unsigned char given by function fgetc(fp). fgetc(fp) returns a character from fp 
+    as specified by its stream, which then advances its file position indicator. This continues until fgetc returns EOF 
+    (if an error or the end-of-file is reached). During each iteration of the loop, c is first checked if it is an alphabetical
+    character or apostrophe not in index position 0 of the word. If true, c is appended to the array word[]. Words exceeding the word
+    character limit will be ignored. Otherwise, if c is numerical, the word is again ignored and word index reset for the next word.
+    Lastly, if the above conditions are not met, c must be a word or punctuation, and a whole word is found. The word is terminated by 
+    adding a \0 to the end of the word array, and all information related to this process updated (such as word count).
+    
+5.  Using fscanf with format string '%s' will cause the function to read subsequent characters until a whitespace is found. This may cause
+    fscanf to read in punctuation in the text (in addition to the original word), which complicates the spell-checking process.
+
+6.  Adding a const keyword declares a variable to be read-only and will never be changed. This helps ensure a degree of safety in the
+    check() and load() functions - the words being spell-checked and the dictionary the word is checked against will not be altered.

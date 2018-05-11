@@ -1,0 +1,32 @@
+# compiler to use
+CC = clang
+
+# flags to pass compiler
+CFLAGS = -ggdb3 -g -O0 -Qunused-arguments -std=c11 -Wall -Werror
+
+# name for executable
+EXE = stringcpy
+# space-separated list of header files
+HDRS = 
+
+# space-separated list of libraries, if any,
+# each of which should be prefixed with -l
+LIBS =
+
+# space-separated list of source files
+SRCS = stringcpy.c
+
+# automatically generated list of object files
+OBJS = $(SRCS:.c=.o)
+
+
+# default target
+$(EXE): $(OBJS) $(HDRS) Makefile
+	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
+
+# dependencies 
+$(OBJS): $(HDRS) Makefile
+
+# housekeeping
+clean:
+	rm -f core $(EXE) *.o

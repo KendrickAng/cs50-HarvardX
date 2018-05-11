@@ -1,0 +1,7 @@
+Name: Kendrick
+Country: Singapore
+
+Video link: https://www.youtube.com/watch?v=6DJyZ_3c3-c
+Github link: https://github.com/WeomuCat/Survive
+
+Introducing Survive, a game a friend of mine and I made together. The game was made using LibGDX and programmed using IntelliJ IDE.

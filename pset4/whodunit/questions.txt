@@ -1,0 +1,26 @@
+1.  stdint.h is a standard library which provides typedefs and macros (such as #define) for fixed-width integral types, as defined in C99 standard.
+
+2.  uint8_t, uint16_t and uint32_t are unsigned integers of size 8bits (range 0-255), 16bits (0 to 65535) and 32 bits (0 to 4,294,967,295) respectively. 
+    They can only hold positive numbers. int32_t is a signed integer of size 32bits (−2,147,483,648 to 2,147,483,647), and can hold positve and negative numbers.
+    Used to store the primitive data types.
+    
+3.  BYTE stores 1 byte, DWORD stores 4 bytes, LONG stores 4 bytes, WORD stores 2 bytes.
+
+4.  The first two bytes are the ASCII character 'B' followed by ASCII character 'M'.
+
+5.  bfSize is the size, in bytes, of a bitmap file (including the header files). biSize is the size, in bytes, of the BITMAPINFOHEADER header file.
+
+6.  If biHeight is negative, the bitmap is a top down Device-Independent Bitmap. The origin of the bitmap as defined by the sequence of bytes in the bitmap file is the 
+    top-left corner of the bitmap image.
+
+7.  biBitCount
+
+8.  The file-opening operation fails- The file might not exist, the user might not have permission to access the file or there might not be enough memory to open it.
+
+9.  The 3rd agrument represents the number of elements of data. As only 1 file is open, only 1 element of data is to be read, so fread's third arguemnt will always be 1.
+
+10. 3
+
+11. fseek is used to set the file position indicator for the stream (as pointed to by its first argument) to a new position.
+
+12. SEEK_CUR defines the position from which the offset (as defined in the 2nd argument of fseek) is added, thus determining the new file position indicator for the stream.

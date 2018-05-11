@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <h1>Index</h1>
+        <table align="center" frame="border" style="width=100%">
+                <tr>
+                    <th>Stock symbol</th>
+                    <th>Stock name</th>
+                    <th>Current stock price</th>
+                    <th>Units owned</th>
+                    <th>Total holdings value</th>
+                </tr>
+
+                {# https://stackoverflow.com/questions/14652325/python-dictionary-in-to-html-table #}
+                {% for tablerow in stocks %}
+                    <tr>
+                        <td>{{ tablerow["symbol"] }}</td>
+                        <td>{{ tablerow["name"] }}</td>
+                        <td>{{ tablerow["price"] }}</td>
+                        <td>{{ tablerow["units"] }}</td>
+                        <td>{{ tablerow["total"] }}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+        <br>
+        <table align="center" frame="border" style="width=100%">
+            <tr>
+                <th>Current cash balance:</th>
+                {% for li in monies %}
+                <td>{{ li["cash"] }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Total value of assets:</th>
+                <td>{{ grandTotal }}</td>
+            </tr>
+        </table>
+
+{% endblock %}

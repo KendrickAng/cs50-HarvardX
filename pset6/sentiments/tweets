@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+
+import sys
+import os
+import nltk
+
+from helpers import get_user_timeline
+from analyzer import Analyzer
+from nltk.tokenize import TweetTokenizer
+from termcolor import colored
+
+def main():
+    # one list for storing tweets (one tweet per index)
+    # another list to eventually pass into analyze() (one word per index)
+    tweetlist = []
+    tweetanlyze = []
+    tweetscore = 0
+
+    # ensure proper usage
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./tweets @screen_name")
+
+    # get tweets
+    try:
+        # stores each tweet in the list tweet. one tweet per index.
+        tweetlist = get_user_timeline(sys.argv[1])
+
+        if tweetlist == None:
+            sys.exit("Something cropped up :/")
+
+    except RuntimeError:
+        sys.exit("Run-time error!")
+
+    # absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+
+    # initialise Analyzer
+    analyzer = Analyzer(positives, negatives)
+
+    # initialise TweetTokenizer
+    tknzr = TweetTokenizer(preserve_case=False, strip_handles=True, reduce_len=True)
+
+    for tweetite in tweetlist:
+
+        # reset tweet score
+        tweetscore = 0
+
+        # return a list of words tweetanlyze from each tweet
+        # convert each tweet into a string to tokenize
+        tweetanlyze = tknzr.tokenize(tweetite)
+
+        # analyze each word in tweetite
+        for tweetite2 in tweetanlyze:
+            score = analyzer.analyze(tweetite2)
+            tweetscore += score
+
+        print_result(tweetscore, tweetite)
+
+# prints score and tweet, with color!
+def print_result(tweetscore, tweetite):
+
+        if tweetscore > 0.0:
+            print(colored(tweetscore, "green"), end="")
+            print(colored(" :) ", "green"), end="")
+            print(colored(tweetite, "green"))
+        elif tweetscore < 0.0:
+            print(colored(tweetscore, "red"), end="")
+            print(colored(" :( ", "red"), end="")
+            print(colored(tweetite, "red"))
+        else:
+            print(colored(tweetscore, "yellow"), end="")
+            print(colored(" :| ", "yellow"), end="")
+            print(colored(tweetite, "yellow"))
+
+if __name__ == "__main__":
+    main()
